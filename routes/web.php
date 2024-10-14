@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -14,6 +15,11 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//Admin
+Route::get('/admin', function () {
+        return 'You are not allowed to access this page';
+})->middleware('can:visitAdminDashboard');
 
 
 // User related routes
