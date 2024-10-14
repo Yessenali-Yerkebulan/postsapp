@@ -22,8 +22,13 @@ class PostController extends Controller
         $incomingFields['user_id'] = auth()->id();
 
 
-        Post::create($incomingFields);
+        $newPost = Post::create($incomingFields);
 
-        return 'post';
+        return redirect("/post/{$newPost->id}")->with('success', 'New post successfully created.');
+    }
+
+    public function viewSinglePost(Post $post) {
+
+        return view('single-post', ['post'=>$post]);
     }
 }
