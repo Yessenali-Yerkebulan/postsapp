@@ -16,7 +16,7 @@
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">BlogApp</a></h4>
-        
+
         @auth
         <div class="flex-row my-3 my-md-0">
           <a href="#" class="text-white mr-2 header-search-icon" title="Search" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-search"></i></a>
@@ -28,7 +28,7 @@
             <button class="btn btn-sm btn-secondary">Sign Out</button>
           </form>
         </div>
-        @else   
+        @else
         <form action="/login" method="POST" class="mb-0 pt-2 pt-md-0">
           @csrf
           <div class="row align-items-center">
@@ -45,7 +45,7 @@
         </form>
         @endauth
 
-        
+
       </div>
     </header>
     <!-- header ends here -->

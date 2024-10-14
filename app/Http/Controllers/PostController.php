@@ -12,13 +12,15 @@ class PostController extends Controller
     }
 
     public function storeNewPost(Request $request) {
+        $allowedTags = '<p><a><strong><em><ul><ol><li><br>';
+
         $incomingFields = $request->validate([
             'title'=>'required',
             'body'=>'required'
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
-        $incomingFields['body'] = strip_tags($incomingFields['body']);
+        $incomingFields['body'] = strip_tags($incomingFields['body'],  $allowedTags);
         $incomingFields['user_id'] = auth()->id();
 
 
