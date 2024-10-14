@@ -30,7 +30,16 @@ class PostController extends Controller
     }
 
     public function viewSinglePost(Post $post) {
-
         return view('single-post', ['post'=>$post]);
+    }
+
+    public function delete(Post $post) {
+        if(auth()->user()->cannot('delete', $post)) {
+            return 'You cannot delete this post';
+        }
+
+        $post->delete();
+
+        return redirect('/profile/'.auth()->user()->username)->with('success', 'Post successfully deleted.');
     }
 }
