@@ -56,6 +56,10 @@ class User extends Authenticatable
         return $this->hasMany(Follow::class,'user_id');
     }
 
+    public function feedPosts() {
+        return $this->hasManyThrough(Post::class, Follow::class,'user_id','user_id','id', 'followeduser');
+    }
+
     protected function avatar(): Attribute {
         return Attribute::make(get: function($value) {
             return $value ? '/storage/avatars/'.$value : '/fallback-avatar.jpg';
