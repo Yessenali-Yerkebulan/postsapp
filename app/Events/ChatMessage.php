@@ -22,7 +22,7 @@ class ChatMessage implements ShouldBroadcastNow
      */
     public function __construct($chat)
     {
-        $this->chat = ['username'=>$chat->username,'textvalue'=>$chat->textvalue, 'avatar'=>$chat->avatar];
+        $this->chat = ['username'=>$chat['username'],'textvalue'=>$chat['textvalue'], 'avatar'=>$chat['avatar']];
     }
 
     /**

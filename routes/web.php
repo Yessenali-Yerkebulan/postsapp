@@ -2,6 +2,7 @@
 
 use App\Events\ChatMessage;
 use App\Http\Controllers\FollowController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
