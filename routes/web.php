@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -18,7 +19,7 @@ use App\Http\Controllers\UserController;
 
 //Admin
 Route::get('/admin', function () {
-        return 'You are not allowed to access this page';
+        return 'You are   not allowed to access this page';
 })->middleware('can:visitAdminDashboard');
 
 
@@ -30,6 +31,9 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/manage-avatar', [UserController::class, 'showAvatarForm'])->middleware('auth');
 Route::post('/manage-avatar', [UserController::class, 'storeAvatar'])->middleware('auth');
 
+// Follow related routes
+Route::post("/create-follow/{user:username}", [FollowController::class, 'createFollow'])->middleware('auth');
+Route::post("/remove-follow/{user:username}", [FollowController::class, 'removeFollow'])->middleware('auth');
 
 // Blog post related routes
 Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('auth');
