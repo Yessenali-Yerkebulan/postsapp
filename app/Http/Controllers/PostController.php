@@ -10,6 +10,26 @@ use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
+    public function storeNewPostApi(Request $request) {
+        $allowedTags = '<p><a><strong><em><ul><ol><li><br>';
+
+        $incomingFields = $request->validate([
+            'title'=>'required',
+            'body'=>'required'
+        ]);
+
+        $incomingFields['title'] = strip_tags($incomingFields['title']);
+        $incomingFields['body'] = strip_tags($incomingFields['body'],  $allowedTags);
+        $incomingFields['user_id'] = auth()->id();
+
+
+        $newPost = Post::create($incomingFields);
+
+        dispatch(new SendNewPostEmail(['sendTo' => auth()->user()->email, 'name' => auth()->user()->username, 'title' => $newPost->title]));
+
+        return $newPost->id;
+    }
+
     public function showCreateForm() {
         return view('create-post');
     }

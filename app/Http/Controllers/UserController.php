@@ -14,6 +14,22 @@ use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
+    public function loginApi(Request $request) {
+        $incomingFields = $request->validate([
+            'username'=>'required',
+            'password'=>'required'
+        ]);
+
+        if(auth()->attempt($incomingFields)) {
+            $user = User::where('username', $incomingFields['username'])->first();
+            $token = $user->createToken('ourapptoken')->plainTextToken;
+
+            return $token;
+        }
+
+        return 'Invalid credentials';
+    }
+
     public function showCorrectHomepage() {
         if(auth()->check()) {
             return view('homepage-feed', ['posts'=>auth()->user()->feedPosts()->latest()->paginate(4)]);
